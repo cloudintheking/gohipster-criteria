@@ -1,2 +1,3 @@
-# go-criteria
+# goHipster-criteria
+
 类似jhipster-criteria

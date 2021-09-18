@@ -96,12 +96,34 @@ var ClauseConstants = ClauseConstantsEnum{
 }
 
 /**
+ *  @Description: 创建条件从句
+ *  @param db
+ *  @param name
+ *  @param criteria
+ *  @return tx
+ */
+func BuildSpecification(db *gorm.DB, name string, criteria interface{}) (tx *gorm.DB) {
+	tx = db
+	switch v := criteria.(type) {
+	case IntFilter:
+		tx = buildIntSpecification(tx, name, v)
+	case StringFilter:
+		tx = buildStringSpecification(tx, name, v)
+	case FloatFilter:
+		tx = buildFloatSpecification(tx, name, v)
+	case BoolFilter:
+		tx = buildBoolSpecification(tx, name, v)
+	}
+	return tx
+}
+
+/**
  * @Description:  创建整数型从句
  * @param tx
  * @param name
  * @param criteria
  */
-func BuildIntSpecification(db *gorm.DB, name string, criteria IntFilter) (tx *gorm.DB) {
+func buildIntSpecification(db *gorm.DB, name string, criteria IntFilter) (tx *gorm.DB) {
 	tx = db
 	var query string
 	if criteria.Equals != nil {
@@ -147,7 +169,7 @@ func BuildIntSpecification(db *gorm.DB, name string, criteria IntFilter) (tx *go
  * @param name
  * @param criteria
  */
-func BuildFloatSpecification(db *gorm.DB, name string, criteria FloatFilter) (tx *gorm.DB) {
+func buildFloatSpecification(db *gorm.DB, name string, criteria FloatFilter) (tx *gorm.DB) {
 	tx = db
 	var query string
 	if criteria.Equals != nil {
@@ -193,7 +215,7 @@ func BuildFloatSpecification(db *gorm.DB, name string, criteria FloatFilter) (tx
  * @param name
  * @param criteria
  */
-func BuildStringSpecification(db *gorm.DB, name string, criteria StringFilter) (tx *gorm.DB) {
+func buildStringSpecification(db *gorm.DB, name string, criteria StringFilter) (tx *gorm.DB) {
 	tx = db
 	var query string
 	if criteria.Equals != nil {
@@ -226,7 +248,7 @@ func BuildStringSpecification(db *gorm.DB, name string, criteria StringFilter) (
  * @param name
  * @param criteria
  */
-func BuildTimeSpecification(db *gorm.DB, name string, criteria TimeFilter) (tx *gorm.DB) {
+func buildTimeSpecification(db *gorm.DB, name string, criteria TimeFilter) (tx *gorm.DB) {
 	tx = db
 	var query string
 	var timeV time.Time
@@ -265,7 +287,7 @@ func BuildTimeSpecification(db *gorm.DB, name string, criteria TimeFilter) (tx *
  * @param criteria
  * @return *gorm.DB
  */
-func BuildBoolSpecification(db *gorm.DB, name string, criteria BoolFilter) (tx *gorm.DB) {
+func buildBoolSpecification(db *gorm.DB, name string, criteria BoolFilter) (tx *gorm.DB) {
 	tx = db
 	var query string
 	if criteria.Equals != nil {
