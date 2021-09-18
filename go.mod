@@ -1,4 +1,4 @@
-module github.com/cloudintheking/go-criteria
+module github.com/cloudintheking/gohipster-criteria
 
 go 1.16
 

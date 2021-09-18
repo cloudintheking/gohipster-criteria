@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/cloudintheking/go-criteria/utils"
+	"github.com/cloudintheking/gohipster-criteria/utils"
 	"gorm.io/gorm"
 	"strconv"
 	"strings"

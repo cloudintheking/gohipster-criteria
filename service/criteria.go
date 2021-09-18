@@ -3,7 +3,7 @@ package service
 import (
 	"errors"
 	"fmt"
-	"github.com/cloudintheking/go-criteria/utils"
+	"github.com/cloudintheking/gohipster-criteria/utils"
 	"reflect"
 	"strconv"
 	"strings"
