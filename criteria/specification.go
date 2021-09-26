@@ -1,4 +1,4 @@
-package service
+package criteria
 
 import (
 	"github.com/cloudintheking/gohipster-criteria/utils"
